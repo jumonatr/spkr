@@ -1,0 +1,11 @@
+vlc-nox: headless version of vlc
+
+#### SERVER ####
+:sout=#rtp{dst=239.255.12.42,port=5004,mux=ts,sap,name=homestream} :sout-keep :no-sout-video
+:sout=#duplicate{dst=rtp{dst=239.255.12.42,port=5004,mux=ts,sap,name=homestream},dst=display} :sout-keep :sout-no-video
+
+working server:
+vlc -vvv C:\Users\Julien\Music\Playlists\Android.xspf :sout=#rtp{dst=239.255.12.42,port=5004,mux=ts,sap,name=BCA12FD8-85C0-4D37-9959-047FE0D708C6} :no-sout-video --sap-strict
+
+#### CLIENT ####
+vlc -vvv rtp://239.255.12.42:5004
