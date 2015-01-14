@@ -35,7 +35,7 @@ namespace vlc
 	public:
 		owner_cwrapper() = default;
 		owner_cwrapper(T* val)
-			: cwrapper(val)
+			: cwrapper<T>(val)
 		{}
 
 		owner_cwrapper(const owner_cwrapper& other) = delete;

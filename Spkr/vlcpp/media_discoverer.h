@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vlc\vlc.h"
+#include "vlc/vlc.h"
 
 #include "cwrapper.h"
 #include "media_list.h"

@@ -1,19 +1,16 @@
 #pragma once
 
-#include "vlc\vlc.h"
+#include "vlc/vlc.h"
 
 #include <functional>
 #include <memory>
 
 namespace vlc
 {
+	void event_callback(const libvlc_event_t* ev, void* hptr);
+
 	class event
 	{
-		friend void event_callback(const libvlc_event_t* ev, void* hptr)
-		{
-			auto ptr = (event*)hptr;
-			ptr->m_fun(ev);
-		}
 	public:
 		typedef std::function<void(const libvlc_event_t* ev)> fun_t;
 		typedef std::shared_ptr<event> handle;
@@ -38,5 +35,11 @@ namespace vlc
 		fun_t m_fun;
 		libvlc_event_manager_t* m_manager;
 		libvlc_event_e m_evt;
+		
+		friend void event_callback(const libvlc_event_t* ev, void* hptr)
+		{
+			auto ptr = (event*)hptr;
+			ptr->m_fun(ev);
+		}
 	};
 }

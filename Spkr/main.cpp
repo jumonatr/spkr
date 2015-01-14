@@ -1,4 +1,4 @@
-#include "vlc\vlc.h"
+#include "vlc/vlc.h"
 
 #include <iostream>
 #include <string>
@@ -7,8 +7,8 @@
 #include <memory>
 #include <type_traits>
 
-#include "vlcpp\media_discoverer.h"
-#include "vlcpp\libvlc.h"
+#include "vlcpp/media_discoverer.h"
+#include "vlcpp/libvlc.h"
 
 using namespace std;
 using namespace vlc;
@@ -94,11 +94,13 @@ private:
 	libvlc m_vlc;
 };
 
-int main(size_t argc, char** argv)
+int main(int argc, char** argv)
 {
 	sap_listener listener;
 
-	system("pause");
+	cout << "press any key to exit..." << endl;
+	char key;
+	cin >> key;
 
 	return 0;
 }
