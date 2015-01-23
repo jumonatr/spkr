@@ -7,13 +7,15 @@
 #include <memory>
 #include <type_traits>
 
+#include "platform.h"
+
 #include "vlcpp/media_discoverer.h"
 #include "vlcpp/libvlc.h"
 
 using namespace std;
 using namespace vlc;
 
-const vector<const char*> vlc_args = { "--sap-timeout=5 --sap-strict" };
+const vector<const char*> vlc_args = { "--network-caching=1000 --sap-timeout=10 --sap-strict --aout alsa" };
 
 char const* const RTP_GUID = "BCA12FD8-85C0-4D37-9959-047FE0D708C6";
 
@@ -98,9 +100,7 @@ int main(int argc, char** argv)
 {
 	sap_listener listener;
 
-	cout << "press any key to exit..." << endl;
-	char key;
-	cin >> key;
+	plat::pause();
 
 	return 0;
 }
