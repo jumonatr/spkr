@@ -2,11 +2,11 @@
 ./pack.sh
 scp spkr.zip pi@$1:~/
 ssh pi@$1 << EOF
-rm -rf Spkr
-unzip spkr.zip
-chmod +x ~/Spkr/onboot.sh
-sudo cp Spkr/interfaces /etc/network/interfaces
-cd ~/Spkr
+rm -rf spkr
+unzip spkr.zip -d spkr
+chmod +x ~/spkr/onboot.sh
+sudo cp spkr/interfaces /etc/network/interfaces
+cd ~/spkr
 make
-crontab ~/Spkr/crontab
+crontab ~/spkr/crontab
 EOF
