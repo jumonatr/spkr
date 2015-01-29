@@ -9,4 +9,5 @@ sudo cp spkr/interfaces /etc/network/interfaces
 cd ~/spkr
 make
 crontab ~/spkr/crontab
+sudo reboot
 EOF

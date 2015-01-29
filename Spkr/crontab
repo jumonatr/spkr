@@ -1,1 +1,1 @@
-@reboot ~/Spkr/onboot.sh
+@reboot ~/spkr/onboot.sh
