@@ -27,6 +27,11 @@ namespace vlc
 			libvlc_audio_set_mute(m_instance, !muted ? 1 : 0);
 		}
 
+		libvlc_state_t get_state() const
+		{
+			return libvlc_media_player_get_state(m_instance);
+		}
+
 		void pause()
 		{
 			libvlc_media_player_pause(m_instance);
