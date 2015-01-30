@@ -28,12 +28,31 @@ public:
 		register_discoverer();
 	}
 
+	void connect()
+	{
+		while(true)
+		{
+			this_thread::sleep_for(chrono::seconds(5));
+
+			if (m_vlc.player().get_state() != libvlc_state_t::libvlc_NothingSpecial)
+				break;
+			
+			cout << "refreshing media discovery" << endl;
+			register_discoverer();
+		}
+		cout << "listener connected" << endl;
+	}
+
 private:
 	void register_discoverer()
 	{
 		m_events.clear();
 
 		m_discoverer = make_shared<media_discoverer>(m_vlc.instance(), "SAP");
+
+		attach(m_discoverer->events(),
+			libvlc_event_e::libvlc_MediaDiscovererStarted,
+			&sap_listener::discovery_started);
 
 		attach(m_discoverer->events(),
 			libvlc_event_e::libvlc_MediaDiscovererEnded,
@@ -46,6 +65,11 @@ private:
 		attach(m_discoverer->list().events(),
 			libvlc_event_e::libvlc_MediaListItemDeleted,
 			&sap_listener::item_removed);
+	}
+
+	void discovery_started(const libvlc_event_t* evt)
+	{
+		cout << "discovery started" << endl;
 	}
 
 	void discovery_ended(const libvlc_event_t* evt)
@@ -99,6 +123,8 @@ private:
 int main(int argc, char** argv)
 {
 	sap_listener listener;
+
+	listener.connect();
 
 	plat::pause();
 
